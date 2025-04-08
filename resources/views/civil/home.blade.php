@@ -18,6 +18,7 @@
                 <th>Email</th>
                 <th>Mobile</th>
                 <th>Age</th>
+                <th>Location</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -29,6 +30,7 @@
                 <td>{{$employee->email }}</td>
                 <td>{{$employee->mobile }}</td>
                 <td>{{$employee->age }}</td>
+                <td>{{$employee->location }}</td>
                 <td>
                     <a href="{{url('civil/'.$employee->id.'/show')}}" class="btn btn-dark btn-sm"><i class="bi bi-eye"></i></a>
                     <a href="{{url('civil/'.$employee->id.'/delete')}}" onclick="return confirm('Are You sure you want to delete this employee?')" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>

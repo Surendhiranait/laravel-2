@@ -52,6 +52,16 @@
                 placeholder="Enter Age" value="{{old('age') }}"/>
             </div>
         </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label for="location" class="form-lable"> Location</lable>
+                <input type="text" name="location" id="location" class="form-control @if($errors->has('location')) {{'is-invalid'}} @endif"  
+                placeholder="Enter Employee location" value="{{old('location') }}"/>
+                @if($errors->has('name'))
+                    <div class="invalid-feedback">Invaild location</div>
+                @endif
+            </div>
+        </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-dark">Submit</button>
             <button type="reset" class="btn btn-danger">Clear All<button>

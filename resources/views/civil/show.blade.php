@@ -15,6 +15,7 @@
         <p class="card-text text-secondary">{{ $civilemployee->age }}</p>
         <p class="fw-semibold">Email: <small class="text-success">{{ $civilemployee->email }}</small></p>
         <p class="fw-semibold">Mobile no: <small class="text-success">{{ $civilemployee->mobile }}</small></p>
+        <p class="fw-semibold">Location: <small class="text-success">{{ $civilemployee->location }}</small></p>
 </div>
 </div>
 

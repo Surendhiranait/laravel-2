@@ -25,6 +25,7 @@ class CivilEmployeeController implements EmployeeReadInterface,EmployeeWriteInte
             'email'=>'required',
             'mobile'=>'required|numeric',
             'age'=>'required|numeric',
+            'location'=>'required',
         ]);
 
 
@@ -33,6 +34,7 @@ class CivilEmployeeController implements EmployeeReadInterface,EmployeeWriteInte
         $civil->email = $request->email;
         $civil->mobile = $request->mobile;
         $civil->age = $request->age;
+        $civil->location = $request->location;
         $civil->save();
         return back()->withSuccess('Employee Added!');
     }
@@ -47,6 +49,4 @@ class CivilEmployeeController implements EmployeeReadInterface,EmployeeWriteInte
         $civilemployee->delete();
         return back()->withSuccess('Employee deleted!');
     }
-
-
 }

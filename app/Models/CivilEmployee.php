@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class CivilEmployee extends Model
 {
     use HasFactory;
+
+    public function location()
+    {
+       return $this->belongsTo(Location::class, 'location', 'city');
+    }
 }
