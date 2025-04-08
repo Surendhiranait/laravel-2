@@ -33,7 +33,7 @@
         
         <div class="mb-3">
             <button type="submit" class="btn btn-dark">Submit</button>
-            <button type="reset" class="btn btn-danger">Clear All<button>
+            <button type="reset" class="btn btn-danger">Clear All</button>
 </div>
 </form>
 </div>
