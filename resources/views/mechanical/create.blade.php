@@ -52,9 +52,15 @@
                 placeholder="Enter Age" value="{{old('age') }}"/>
             </div>
         </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label for="image" class="form-lable"> Employee Image</lable>
+                <input type="file" name="image" id="image" class="form-control @if($errors->has('image')) {{'is-invalid'}} @endif" />
+            </div>
+        </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-dark">Submit</button>
-            <button type="reset" class="btn btn-danger">Clear All<button>
+            <button type="reset" class="btn btn-danger">Clear All</button>
 </div>
 </form>
 </div>

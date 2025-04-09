@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    /*public function run()
     {
         $faker = Faker::create();
 
@@ -24,5 +24,28 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('password'), 
             ]);
         }
+    }*/
+    public function run()
+    {
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'), // never store plain passwords
+            'role' => 'admin', // 👈 important
+        ]);
+
+        User::create([
+            'name' => 'Civil User',
+            'email' => 'civil@example.com',
+            'password' => bcrypt('password'),
+            'role' => 'civil',
+        ]);
+
+        User::create([
+            'name' => 'Mechanical User',
+            'email' => 'mech@example.com',
+            'password' => bcrypt('password'),
+            'role' => 'mechanical',
+        ]);
     }
 }
