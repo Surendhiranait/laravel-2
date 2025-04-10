@@ -1,14 +1,15 @@
 @extends('layout.app')
 @section('main')
 <div>
-<h1>All Posts</h1>
+<h1>One to Many / Has Many :</h1> 
+<hr >
+<h3>Posts by {{ $user->name }}</h3>
 
 <ul>
-    @foreach($posts as $post)
+    @foreach($user->posts as $post)
         <li>
             <strong>{{ $post->title }}</strong><br>
-            {{ $post->content }}<br>
-            <small>by {{ $post->user->name }}</small>
+            {{ $post->content }}
         </li>
     @endforeach
 </ul>

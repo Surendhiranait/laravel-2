@@ -3,6 +3,64 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\CivilInternService;
+
+class CivilInternsController extends Controller
+{
+    protected $civilInternService;
+
+    public function __construct(CivilInternService $civilInternService)
+    {
+        $this->civilInternService = $civilInternService;
+    }
+
+    public function getAll()
+    {
+        $civilinterns = $this->civilInternService->getAllInterns();
+        return view('civilIntern.home', compact('civilinterns'));
+    }
+
+    public function getOne($id)
+    {
+        $civilinterns= $this->civilInternService->getOneInterns($id);
+        return view('civilIntern.show',['civilintern'=>$civilinterns]);
+    }
+
+    public function create()
+    {
+        // If needed, you can use: $this->civilInternService->createInternForm();
+        return view('civilIntern.create');
+    }
+
+    public function store(Request $request)
+    {
+        $this->civilInternService->storeIntern($request);
+        return back()->withSuccess('Intern Added!');
+    }
+
+    public function edit($id)
+    {
+        $civilintern = $this->civilInternService->getOneInterns($id);
+        return view('civilIntern.edit', compact('civilintern'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->civilInternService->updateIntern($request, $id);
+        return redirect()->route('civilIntern.home')->with('success', 'Intern updated successfully!');
+    }
+    public function delete($id)
+    {
+        $this->civilInternService->deleteIntern($id);
+        return redirect()->route('civilIntern.home')->with('success', 'Intern deleted successfully!');
+    }
+
+}
+
+
+/*namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
 use App\Models\CivilIntern;
 use App\Interfaces\CivilInternInterface;
 

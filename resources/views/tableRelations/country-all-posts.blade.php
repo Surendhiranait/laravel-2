@@ -1,7 +1,9 @@
 @extends('layout.app')
 @section('main')
 <div>
-<h1>All Posts from {{ $country->name }}</h1>
+<h1>Has Many Through:</h1> 
+<hr >
+<h3>All Posts from {{ $country->name }}</h3>
 
 @if($country->posts->count())
     @foreach($country->posts as $post)

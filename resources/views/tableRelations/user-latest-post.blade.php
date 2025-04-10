@@ -1,7 +1,9 @@
 @extends('layout.app')
 @section('main')
 <div>
-<h1>{{ $user->name }}'s Latest Post</h1>
+<h1>Has One of Many:</h1> 
+<hr >
+<h3>{{ $user->name }}'s Latest Post</h3>
 
     @if($user->latestPost)
         <div style="margin-bottom: 20px;">
@@ -13,4 +15,4 @@
         <p>This user has no posts yet.</p>
     @endif
 </div>
-@endsection
+@endsection        

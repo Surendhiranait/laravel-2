@@ -7,14 +7,18 @@ use App\Interfaces\CivilInternInterface;
 use App\Repositories\CivilInternRepository;
 use App\Interfaces\EmployeeWriteInterface;
 use App\Services\EmployeeService;
+use App\Interfaces\UserRepositoryInterface;
+use App\Repositories\UserRepository;
+use App\Interfaces\PostRepositoryInterface;
+use App\Repositories\PostRepository;
+use App\Interfaces\CountryRepositoryInterface;
+use App\Repositories\CountryRepository;
+use App\Interfaces\MailRepositoryInterface;
+use App\Repositories\MailRepository;
+
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
 
     protected $policies = [
         \App\Models\CivilEmployee::class => \App\Policies\CivilEmployeePolicy::class,
@@ -25,6 +29,15 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CivilInternInterface::class, CivilInternRepository::class);
 
         $this->app->bind(EmployeeWriteInterface::class, EmployeeService::class);
+
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+
+        $this->app->bind(PostRepositoryInterface::class, PostRepository::class);
+
+        $this->app->bind(CountryRepositoryInterface::class, CountryRepository::class);
+
+        $this->app->bind(MailRepositoryInterface::class, MailRepository::class);
+
     }
 
     /**

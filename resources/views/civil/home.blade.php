@@ -41,6 +41,7 @@
                 <td>{{$employee->mobile }}</td>
                 <td>{{$employee->age }}</td>
                 <td>{{$employee->location }}</td>
+                
                 <td>
                     <a href="{{url('civil/'.$employee->id.'/show')}}" class="btn btn-dark btn-sm"><i class="bi bi-eye"></i></a>
                 <!--    <a href="{{url('civil/'.$employee->id.'/delete')}}" onclick="return confirm('Are You sure you want to delete this employee?')" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
@@ -57,7 +58,16 @@
                         <i class="bi bi-trash"></i>
                     </button>
                 @endcan
-                </td>
+                <!-- Send Email Button -->
+                <form action="{{ url('/report/send/' . $employee->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    <input type="hidden" name="name" value="{{ $employee->name }}">
+                    <input type="hidden" name="email" value="{{ $employee->email }}">
+                    <button type="submit" class="btn btn-primary btn-sm" title="Send Email Report">
+                        <i class="bi bi-envelope"></i>
+                    </button>
+                </form>
+            </td>
 </tr>
 @endforeach
 

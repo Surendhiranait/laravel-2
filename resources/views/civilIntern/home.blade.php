@@ -21,6 +21,7 @@
                 <th>City</th>
                 <th>State</th>
                 <th>Country</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -34,7 +35,13 @@
                 <td>{{$interns->city }}</td>
                 <td>{{$interns->state }}</td>
                 <td>{{$interns->country }}</td>
-</tr>
+                <td>
+                    <a href="{{url('civilIntern/'.$interns->id.'/show')}}" class="btn btn-dark btn-sm"><i class="bi bi-eye"></i></a>
+                    <a href="{{url('civilIntern/'.$interns->id.'/edit')}}" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i></a>
+                    <a href="{{url('civilIntern/'.$interns->id.'/delete')}}" onclick="return confirm('Are You sure you want to delete this employee?')" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+            
+                </td>
+            </tr>
 @endforeach
 
 

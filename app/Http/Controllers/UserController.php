@@ -2,27 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Interfaces\UserRepositoryInterface;
 
 class UserController extends Controller
 {
+    protected $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function index()
     {
-        $users = User::all();
-
-        return view('users.index', compact('users'));
+        $users = $this->userRepository->getAll();
+        return view('tableRelations.users', compact('users'));
     }
 
     public function allPosts($id)
     {
-        $user = User::with('posts')->findOrFail($id);
-        return view('user-posts', compact('user'));
+        $user = $this->userRepository->getAllPosts($id);
+        return view('tableRelations.user-posts', compact('user'));
     }
 
     public function latestPost($id)
     {
-        $user = User::with('latestPost')->findOrFail($id);
-        return view('user-latest-post', compact('user'));
+        $user = $this->userRepository->getLatestPost($id);
+        return view('tableRelations.user-latest-post', compact('user'));
     }
 }
