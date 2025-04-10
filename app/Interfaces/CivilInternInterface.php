@@ -2,6 +2,7 @@
 namespace App\Interfaces;
 
 use Illuminate\Http\Request;
+use App\DTOs\CivilInternDTO;
 
 interface CivilInternInterface
 {
@@ -11,9 +12,9 @@ interface CivilInternInterface
 
     public function create();
 
-    public function store(Request $request);
+    public function store(CivilInternDTO $dto);
 
-    public function update(Request $request, $id);
+    public function update(CivilInternDTO $dto, $id);
 
     public function delete($id);
 

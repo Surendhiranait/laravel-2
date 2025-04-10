@@ -6,6 +6,7 @@ use App\Interfaces\MailRepositoryInterface;
 use App\Mail\ContactFormMail;
 use App\Mail\GreetingMail;
 use Illuminate\Support\Facades\Mail;
+use App\Events\MailSendingEvent;
 
 class MailRepository implements MailRepositoryInterface
 {
@@ -20,13 +21,16 @@ class MailRepository implements MailRepositoryInterface
             'subject' => $data['subject'],
             'button_link' => $data['button_link'],
             'attachments' => $attachments,
+            'template' => $data['template'],
         ];
+        
 
         $mailClass = $data['template'] === 'greeting'
             ? new GreetingMail($emailData)
             : new ContactFormMail($emailData);
 
-        Mail::to($emailData['email'])->send($mailClass);
+        event(new MailSendingEvent($emailData));
+        //Mail::to($emailData['email'])->send($mailClass);
 
         return true;
     }

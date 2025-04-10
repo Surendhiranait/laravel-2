@@ -4,6 +4,8 @@ namespace App\Repositories;
 use App\Models\CivilIntern;
 use App\Interfaces\CivilInternInterface;
 use Illuminate\Http\Request;
+use App\DTOs\CivilInternDTO;
+
 
 class CivilInternRepository implements CivilInternInterface
 {
@@ -22,45 +24,34 @@ class CivilInternRepository implements CivilInternInterface
         return 'Create new intern.';
     }
 
-    public function store(Request $request)
+    public function store(CivilInternDTO $dto)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'mobile' => 'required|numeric',
-            'age' => 'required|numeric',
-            'city' => 'required',
-            'state' => 'required',
-            'country' => 'required',
-        ]);
-
         $intern = new CivilIntern();
-        $intern->name = $validatedData['name'];
-        $intern->email = $validatedData['email'];
-        $intern->mobile = $validatedData['mobile'];
-        $intern->age = $validatedData['age'];
-        $intern->city = $validatedData['city'];
-        $intern->state = $validatedData['state'];
-        $intern->country = $validatedData['country'];
+        $intern->name    = $dto->name;
+        $intern->email   = $dto->email;
+        $intern->mobile  = $dto->mobile;
+        $intern->age     = $dto->age;
+        $intern->city    = $dto->city;
+        $intern->state   = $dto->state;
+        $intern->country = $dto->country;
         $intern->save();
 
         return $intern;
     }
 
-    public function update(Request $request, $id)
+    public function update(CivilInternDTO $dto, $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'mobile' => 'required|numeric',
-            'age' => 'required|numeric',
-            'city' => 'required',
-            'state' => 'required',
-            'country' => 'required',
-        ]);
-
         $intern = CivilIntern::findOrFail($id);
-        $intern->update($validatedData);
+
+        $intern->update([
+            'name'    => $dto->name,
+            'email'   => $dto->email,
+            'mobile'  => $dto->mobile,
+            'age'     => $dto->age,
+            'city'    => $dto->city,
+            'state'   => $dto->state,
+            'country' => $dto->country,
+        ]);
 
         return $intern;
     }

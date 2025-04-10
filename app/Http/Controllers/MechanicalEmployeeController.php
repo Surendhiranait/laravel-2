@@ -8,6 +8,7 @@ use App\Interfaces\EmployeeReadInterface;
 use App\Interfaces\EmployeeWriteInterface;
 use App\Services\EmployeeService;
 use Illuminate\Support\Facades\Gate;
+use App\DTOs\MechanicalEmployeeDTO;
 
 class MechanicalEmployeeController extends Controller
 {
@@ -43,8 +44,16 @@ class MechanicalEmployeeController extends Controller
         if (!Gate::any(['access-admin', 'access-mechanical'])) {
             abort(403); // Forbidden
         }
+        $data = $request->only(['name', 'email', 'mobile', 'age']);
 
-        $this->employeeService->store($request, MechanicalEmployee::class);
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image'); // pass file to DTO
+        }
+
+        $dto = new MechanicalEmployeeDTO($data);
+
+        $this->employeeService->store($dto, MechanicalEmployee::class);
+        
         return redirect()->route('mechanical.home')->with('success', 'Mechanical employee added.');
     }
 

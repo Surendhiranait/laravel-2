@@ -8,6 +8,7 @@ use App\Interfaces\EmployeeReadInterface;
 use App\Interfaces\EmployeeWriteInterface;
 use App\Services\EmployeeService;
 use Illuminate\Support\Facades\Gate;
+use App\DTOs\CivilEmployeeDTO;
 
 class CivilEmployeeController extends Controller
 {
@@ -69,7 +70,16 @@ class CivilEmployeeController extends Controller
             abort(403); // Forbidden
         }
 
-        $this->employeeService->store($request, CivilEmployee::class);
+        $data = $request->only(['name', 'email', 'mobile', 'age', 'location']);
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image'); // pass file to DTO
+        }
+
+        $dto = new CivilEmployeeDTO($data);
+
+        $this->employeeService->store($dto, CivilEmployee::class);
+        
         return redirect()->route('civil.home')->with('success', 'Civil employee added.');
     }
 

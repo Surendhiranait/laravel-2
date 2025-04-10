@@ -15,6 +15,7 @@ use App\Interfaces\CountryRepositoryInterface;
 use App\Repositories\CountryRepository;
 use App\Interfaces\MailRepositoryInterface;
 use App\Repositories\MailRepository;
+use Illuminate\Support\Facades\Schema;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -47,6 +48,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Schema::defaultStringLength(191);
     }
 }

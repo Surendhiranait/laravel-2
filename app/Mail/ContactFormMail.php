@@ -31,10 +31,12 @@ class ContactFormMail extends Mailable
 
                   if (!empty($this->contact_data['attachments'])) {
                     foreach ($this->contact_data['attachments'] as $file) {
+                        if (file_exists($file['path'])) { 
                         $email->attach($file['path'], [
                             'as' => $file['name'],
                             'mime' => $file['mime'],
                         ]);
+                    }
                     }
                 }
 

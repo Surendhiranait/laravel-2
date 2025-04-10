@@ -28,29 +28,16 @@ class EmployeeService implements EmployeeWriteInterface
 
     }
 
-    public function store(Request $request, $model)
+    public function store($dto, $model)
     {
-        $fields = ['name', 'email', 'mobile', 'age'];
+        $data = $dto->toArray();
 
-        if (in_array('location', (new $model)->getFillable())) {
-            $fields[] = 'location';
-        }
-
-        $data = $request->only($fields);
-
-        if ($request->hasFile('image')) {
-            $data['image_path'] = $this->uploadImage($request->file('image'));
+        // Use the trait here
+        if ($dto->image) {
+            $data['image_path'] = $this->uploadImage($dto->image);
         }
 
         return $model::create($data);
-    
-    /*$data = $request->only(['name', 'email', 'mobile', 'age', 'location']);
-
-        if ($request->hasFile('image')) {
-            $data['image_path'] = $this->uploadImage($request->file('image'));
-        }
-
-        return $model::create($data);*/
     }
 
     public function destroy($id)

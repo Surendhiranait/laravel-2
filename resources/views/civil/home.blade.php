@@ -58,15 +58,7 @@
                         <i class="bi bi-trash"></i>
                     </button>
                 @endcan
-                <!-- Send Email Button -->
-                <form action="{{ url('/report/send/' . $employee->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    <input type="hidden" name="name" value="{{ $employee->name }}">
-                    <input type="hidden" name="email" value="{{ $employee->email }}">
-                    <button type="submit" class="btn btn-primary btn-sm" title="Send Email Report">
-                        <i class="bi bi-envelope"></i>
-                    </button>
-                </form>
+                
             </td>
 </tr>
 @endforeach

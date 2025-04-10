@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\DTOs\UserDTO;
+use App\Repositories\UserRepository;
 
 class EmployeeRegistration extends Controller
 {
@@ -11,26 +13,18 @@ class EmployeeRegistration extends Controller
         return view('employee.create');
     }
 
-    public function register(Request $request) {
-
+    public function register(Request $request)
+    {
         $request->validate([
-            'name'=>'required',
-            'email'=>'required',
-            'password'=>'required',
-            
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
         ]);
 
-        try {
+        $dto = UserDTO::fromRequest($request);
+        $this->userRepository->store($dto);
 
-            $employee=new Employee();
-            $employee->name = $request->name;
-            $employee->email = $request->email;
-            $employee->password = $request->password;
-            $employee->save();
-            return back()->withSuccess('Employee Details Added!');
-        } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'Failed to add employee. Please try again.']);
-        }
+        return back()->withSuccess('User Added!');
     }
 
 }

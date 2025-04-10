@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Interfaces\CivilInternInterface;
 use Illuminate\Http\Request;
+use App\DTOs\CivilInternDTO;
 
 class CivilInternService
 {
@@ -29,14 +30,14 @@ class CivilInternService
         return $this->civilInternRepository->create();
     }
 
-    public function storeIntern(Request $request)
+    public function storeIntern(CivilInternDTO $dto)
     {
-        return $this->civilInternRepository->store($request);
+        return $this->civilInternRepository->store($dto);
     }
 
-    public function updateIntern(Request $request, $id)
+    public function updateIntern(CivilInternDTO $dto, $id)
     {
-        return $this->civilInternRepository->update($request, $id);
+        return $this->civilInternRepository->update($dto, $id);
     }
     
     public function deleteIntern($id)
